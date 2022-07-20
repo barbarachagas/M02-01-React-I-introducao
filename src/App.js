@@ -1,31 +1,34 @@
 import { useState } from "react";
+import DateInput from "./components/DateInput";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import TextInput from "./components/TextInput";
 
 export default function App() {
   const [name, setName] = useState("Barbara");
+  const [birthDate, setBirthDate] = useState("1993-11-04");
 
-  function handleNameChange(event) {
-    setName(event.currentTarget.value);
+  function handleNameChange(newName) {
+    setName(newName);
+  }
+  function handleBirthDateChange(newBirthDate) {
+    setBirthDate(newBirthDate);
   }
 
   return (
     <>
       <Header>React Hello</Header>
       <Main>
-        <div className="flex flex-col my-4">
-          <label htmlFor="input-name" className="text-sm mb-1">
-            Digite o seu nome:
-          </label>
-          <input
-            id="input-name"
-            autoFocus
-            className="border p-1"
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-          />
-        </div>
+        <DateInput
+          labelDescription="Digite sua data de nascimento: "
+          inputValue={birthDate}
+          onInputChange={handleBirthDateChange}
+        />
+        <TextInput
+          labelDescription="Escreva o seu nome"
+          inputValue={name}
+          onInputChange={handleNameChange}
+        />
         <p>
           O seu nome é {name}, com {name.length} caracteres, e você possui 28
           anos.
